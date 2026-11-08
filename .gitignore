@@ -1,0 +1,43 @@
+# build
+build/
+sf/build/
+sim/build/
+sim/.deps/
+*.so
+*.o
+*.a
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
+
+# generated at build time
+vehicle/params.yaml
+sf/tracks/*/*.blob
+sf/tracks/*/*_overlay.png
+sim/tests/fixtures.h
+sim/tests/fixtures_edt.h
+sim/tests/test_dynamics
+sim/tests/test_env
+sim/tests/test_edt
+
+# python (uv-managed venv; uv.lock is tracked)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+
+# training and evaluation outputs; the thesis policies are tracked
+outputs/*
+!outputs/trained_agents/
+outputs/trained_agents/*
+!outputs/trained_agents/racing-agent/
+!outputs/trained_agents/obstacle-agent/
+wandb/
+
+# editors
+.vscode/
+.idea/
+.cache/
+*.swp
+.DS_Store

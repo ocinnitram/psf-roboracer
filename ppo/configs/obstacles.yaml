@@ -1,0 +1,55 @@
+# obstacles: the default obstacle policy on lab-20260906. Same HPs as empty.yaml (the
+# empty-track sweep winner, racing-agent), two crates from step 0 at random placements
+# redrawn every episode, no warm start, 10M steps.
+#
+#   ./train obstacles
+#
+# Thesis retention variant (keep a layout through crashes until num_laps are done),
+# run name obstacles-complete:
+#   ./train obstacles --layout-switch complete
+ppo:
+  batch_size: 1024
+  rollout: 16384
+  clip: 0.15703992142051454
+  c2_i: 0.006
+  c2_f: 0.0005
+  gae_lambda: 0.9167085614832758
+  gamma: 0.995
+  alpha: 0.000643602581855362
+  log_std_i: -1.1948138234446586
+  n_epochs: 6
+  normalise_advantages: false
+  target_kl: 0.05
+  c1: 0.5
+  hidden_size: 512
+  r_progress: 50.0
+  r_collision: -10.0
+  r_lap: 40.0
+  caps_lambda_t: 0.360878557301988
+  caps_lambda_s: 0.10210922064696584
+  caps_lambda_t_v: 0.2
+  caps_lambda_s_v: 0.4
+  caps_sigma_s: 0.05
+  caps_scale_hold: null
+track:
+  map: lab-20260906
+training:
+  run_name: obstacles
+  n_phase1_steps: 0
+  n_phase2_steps: 10000000
+  ckpt_interval: 1000000
+  eval_interval: 100000
+  patience_evals: 200
+  eval_set: obs-set-dev-500
+  n_empty_envs: 0
+  layout_switch: episode
+  sim2real: true
+  num_laps: 2
+obstacles:
+  n_obstacles: 2
+  min_s_distance: 5.0
+  obstacle_width: 0.25
+  obstacle_length: 0.35
+  centre_deadzone: 0.0
+  start_exclusion: 5.0
+  zones_file: zones.json

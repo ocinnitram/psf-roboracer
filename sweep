@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Hyper-parameter sweep.   ./sweep <phase> [--base <run>] [--warmstart <run>] [--set k=v ...] [--agents N] [--attach <sweep-id>] [--trials N] [--dry-run]
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/.launcher.sh"
+exec uv run --frozen python -u -m ppo.sweep "$@"

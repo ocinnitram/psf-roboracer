@@ -1,0 +1,51 @@
+# obstacles-warmstart: obstacle training on lab-20260906, warm-started from an empty-track run.
+# Each environment keeps its layout until num_laps flying laps are completed; a crash keeps it.
+# In-loop evaluation on obs-set-dev-500. The search space in ppo/sweeps/obstacles.yaml starts here;
+# the thesis obstacle-agent is this config with the sweep winner's PPO hyper-parameters.
+#
+#   ./train obstacles-warmstart --warmstart racing-agent --seeds 17,76,693
+ppo:
+  batch_size: 1024
+  rollout: 8192
+  clip: 0.2
+  c2_i: 0.012930671002858373
+  c2_f: 0.0005552204399590337
+  gae_lambda: 0.97
+  gamma: 0.995
+  alpha: 0.00045026768451857536
+  log_std_i: -0.7
+  n_epochs: 10
+  normalise_advantages: false
+  target_kl: 0.02
+  c1: 0.5
+  hidden_size: 512
+  r_progress: 50.0
+  r_collision: -10.0
+  r_lap: 40.0
+  caps_lambda_t: 0.6
+  caps_lambda_s: 0.3
+  caps_lambda_t_v: 0.2
+  caps_lambda_s_v: 0.4
+  caps_sigma_s: 0.05
+  caps_scale_hold: 0.5
+
+track:
+  map: lab-20260906
+
+training:
+  run_name: obstacles-warmstart
+  n_phase1_steps: 0
+  n_phase2_steps: 5_000_000
+  n_empty_envs: 0
+  sim2real: true
+  eval_set: obs-set-dev-500
+  num_laps: 2
+
+obstacles:
+  n_obstacles: 2
+  min_s_distance: 5.0
+  obstacle_width: 0.25
+  obstacle_length: 0.35
+  centre_deadzone: 0.0
+  start_exclusion: 5.0
+  zones_file: zones.json

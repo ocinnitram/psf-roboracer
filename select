@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Rank a wandb sweep by converged score and write the next-stage configs.
+#   ./select <sweep-id> [--top N] [--last K] [--seeds 76,693] [--base <cfg>] [--set k=v ...] [--seeded]
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/.launcher.sh"
+exec uv run --frozen python -u -m ppo.select "$@"

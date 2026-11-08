@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Build the simulator and the safety-filter module against the project's Python.
+#   ./rebuild            incremental
+#   ./rebuild clean      wipe sf/build and sim/build first
+#   ./rebuild render     link the simulator against raylib (live window); default is headless
+# Options combine: ./rebuild clean render
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/.launcher.sh"
+render=0
+for arg in "$@"; do
+    case "$arg" in
+        clean) rm -rf sf/build sim/build ;;
+        render) render=1 ;;
+        *) echo "usage: ./rebuild [clean] [render]" >&2; exit 2 ;;
+    esac
+done
+uv sync --frozen --extra trackgen
+# ninja comes from the venv so a bare machine only needs cmake and a compiler.
+export PATH="$PWD/.venv/bin:$PATH"
+python="$(uv run --frozen python -c 'import sys; print(sys.executable)')"
+echo ">> rebuild  python=$python  render=$render"
+make -C sim RENDER=$render
+cmake -S sf -B sf/build -G Ninja -DPython_EXECUTABLE="$python" -DCMAKE_BUILD_TYPE=Release >/dev/null
+cmake --build sf/build -j
+# Track blobs are generated, not tracked: compile any that are missing or stale.
+for raceline in sf/tracks/*/raceline.csv; do
+    map="$(basename "$(dirname "$raceline")")"
+    blob="sf/tracks/$map/$map.blob"
+    if [ ! -f "$blob" ] || [ "$raceline" -nt "$blob" ]; then
+        "$python" sim/tools/compile_track.py "$map" --no-plot
+    fi
+done

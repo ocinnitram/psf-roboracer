@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the thesis below."
+title: "psf-roboracer: PPO racing policy with a predictive safety filter for obstacle avoidance"
+type: software
+authors:
+  - family-names: "Märtin"
+    given-names: "Nico"
+    affiliation: "Stellenbosch University"
+repository-code: "https://github.com/ocinnitram/psf-roboracer"
+url: "https://ocinnitram.github.io/psf-roboracer/"
+license: MIT
+date-released: "2026-11-08"
+keywords:
+  - safe reinforcement learning
+  - predictive safety filter
+  - autonomous racing
+  - obstacle avoidance
+  - RoboRacer
+preferred-citation:
+  type: thesis
+  thesis-type: "Master's thesis"
+  title: "Safe Reinforcement Learning Using a Predictive Safety Filter for Obstacle Avoidance in Autonomous Racing"
+  authors:
+    - family-names: "Märtin"
+      given-names: "Nico"
+  institution:
+    name: "Stellenbosch University"
+    city: "Stellenbosch"
+    country: ZA
+  year: 2026
+  month: 11

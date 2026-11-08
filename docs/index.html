@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safe Reinforcement Learning Using a Predictive Safety Filter for Obstacle Avoidance in Autonomous Racing</title>
+<meta name="description" content="MEng thesis, Stellenbosch University: a PPO racing policy with a predictive safety filter for obstacle avoidance on a 1:10 scale RoboRacer vehicle.">
+<meta property="og:title" content="Safe Reinforcement Learning Using a Predictive Safety Filter for Obstacle Avoidance in Autonomous Racing">
+<meta property="og:description" content="A PPO racing policy and a predictive safety filter on a 1:10 scale RoboRacer vehicle.">
+<meta property="og:image" content="https://ocinnitram.github.io/psf-roboracer/media/poster.jpg">
+<style>
+  :root { --maroon: #61223b; --gold: #b79962; --bg: #f7f7f5; --fg: #1a1a1a; --muted: #6b6b6b; --line: #e2ddd6; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 17px/1.6 "Noto Sans", "Segoe UI", system-ui, -apple-system, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 40px 24px 64px; }
+  .logos { display: flex; gap: 24px; align-items: center; margin-bottom: 28px; }
+  .logos img { height: 64px; width: auto; }
+  h1 { color: var(--maroon); font-size: clamp(1.5rem, 3.2vw, 2.2rem); line-height: 1.25; margin: 0 0 14px; }
+  .rule { width: 160px; height: 2px; background: var(--gold); margin: 0 0 14px; }
+  .meta { color: var(--muted); margin: 0; }
+  .meta strong { color: var(--fg); font-weight: 600; }
+  .links { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0 0; padding: 0; list-style: none; }
+  .links a { display: inline-block; padding: 7px 16px; border: 1px solid var(--maroon); border-radius: 999px;
+             color: var(--maroon); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+  .links a:hover { background: var(--maroon); color: #fff; }
+  video { display: block; width: 100%; margin: 32px 0 8px; border-radius: 10px; border: 1px solid var(--line);
+          background: #000; aspect-ratio: 16 / 9; }
+  .dl { font-size: 0.9rem; color: var(--muted); margin: 0; }
+  a { color: var(--maroon); }
+  h2 { color: var(--maroon); font-size: 1.25rem; margin: 40px 0 10px; }
+  table { border-collapse: collapse; width: 100%; background: #fff; border: 1px solid var(--line); }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  th { color: var(--maroon); font-weight: 600; background: #fbf9f7; }
+  pre { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; overflow-x: auto;
+        font-size: 0.85rem; line-height: 1.5; }
+  footer { margin-top: 48px; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="logos">
+    <img src="media/su_logo.png" alt="Stellenbosch University">
+    <img src="media/esl_logo.png" alt="Electronic Systems Laboratory">
+  </div>
+  <h1>Safe Reinforcement Learning Using a Predictive Safety Filter for Obstacle Avoidance in Autonomous Racing</h1>
+  <div class="rule"></div>
+  <p class="meta"><strong>Nico Märtin</strong> · MEng (Electronic) · Electronic Systems Laboratory, Stellenbosch University · 2026</p>
+  <p class="meta">Supervisors: Prof L. Zhang · Dr J.C. Schoeman</p>
+  <ul class="links">
+    <li><a href="https://github.com/ocinnitram/psf-roboracer">Code and data</a></li>
+    <li><a href="media/thesis_video.mp4" download>Video (MP4)</a></li>
+    <li><a href="#citation">Citation</a></li>
+  </ul>
+
+  <video controls preload="metadata" poster="media/poster.jpg" playsinline>
+    <source src="media/thesis_video.mp4" type="video/mp4">
+    Your browser cannot play this video. <a href="media/thesis_video.mp4">Download it (MP4)</a>.
+  </video>
+  <p class="dl">4:18 · 1080p</p>
+
+  <h2>Summary</h2>
+  <p>Reinforcement learning can learn high-performance control, but it cannot by itself guarantee that a system's
+  constraints are satisfied. This work develops a PPO racing policy for the 1:10 scale RoboRacer vehicle and a
+  predictive safety filter that corrects any unsafe command the policy proposes.</p>
+  <p>The policy is trained in a high-fidelity simulator that models the actuators, tyres, sensor timing, computational
+  delay and noise, and is deployed on the vehicle without further training, using only onboard localisation. Further
+  training on tracks with randomly placed obstacles raises the share of 500 unseen obstacle layouts it completes from
+  39&nbsp;% to 94&nbsp;%.</p>
+  <p>The remaining crashes show that learning alone is not enough. The safety filter tracks obstacles from onboard
+  LiDAR and, before a command is applied, verifies that the vehicle can still pass the obstacle at a reduced speed, or
+  stop, without a collision. If it cannot, the filter corrects the command.</p>
+
+  <h2>Results</h2>
+  <table>
+    <tr><th></th><th>Policy alone</th><th>With safety filter</th></tr>
+    <tr><td>Simulation, 500 unseen obstacle layouts</td><td>94&nbsp;% completed</td><td>99.8&nbsp;% completed</td></tr>
+    <tr><td>Real vehicle, four obstacle layouts</td><td>crashed on 2 of 4</td><td>113 obstacle passes without a collision</td></tr>
+    <tr><td>Onboard computation (Jetson Orin)</td><td colspan="2">whole control computation under 20&nbsp;ms</td></tr>
+    <tr><td>Commands changed around obstacles (vehicle)</td><td colspan="2">11 to 22&nbsp;%</td></tr>
+    <tr><td>Lap-time cost on the empty track (vehicle)</td><td colspan="2">at most 0.43&nbsp;s per lap</td></tr>
+  </table>
+
+  <h2 id="citation">Citation</h2>
+<pre>@mastersthesis{maertin2026psf,
+  author = {M{\"a}rtin, Nico},
+  title  = {Safe Reinforcement Learning Using a Predictive Safety Filter for Obstacle Avoidance in Autonomous Racing},
+  school = {Stellenbosch University},
+  year   = {2026},
+  month  = nov,
+  url    = {https://github.com/ocinnitram/psf-roboracer}
+}</pre>
+
+  <footer>
+    Footage: laboratory runs on 8 September 2026. Simulation and replay overlays are generated from the logged runs
+    and the filter used on the vehicle.<br>
+    Music: “Hypnotic Synth Arpeggios with Deep Bass Pulse” by Juraganvisi, via Pixabay (Pixabay Content License).
+  </footer>
+</main>
+</body>
+</html>

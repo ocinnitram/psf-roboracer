@@ -1,0 +1,318 @@
+{
+  "config": {
+    "ppo": {
+      "batch_size": 1024,
+      "rollout": 8192,
+      "clip": 0.10061193760680263,
+      "c2_i": 0.012930671002858373,
+      "c2_f": 0.0005552204399590337,
+      "gae_lambda": 0.961831763898234,
+      "gamma": 0.995,
+      "alpha": 0.0003551499486407444,
+      "log_std_i": -0.7,
+      "n_epochs": 10,
+      "normalise_advantages": false,
+      "target_kl": 0.05,
+      "c1": 0.5,
+      "hidden_size": 512,
+      "r_progress": 50.0,
+      "r_collision": -10.0,
+      "r_lap": 40.0,
+      "caps_lambda_t": 0.6,
+      "caps_lambda_s": 0.3,
+      "caps_lambda_t_v": 0.2,
+      "caps_lambda_s_v": 0.4,
+      "caps_sigma_s": 0.05,
+      "caps_scale_hold": 0.5
+    },
+    "track": {
+      "map": "lab-20260906",
+      "opt_time": 7.02,
+      "length": 24.387,
+      "direction": "cw",
+      "start_pose": [
+        0.0236,
+        0.2606,
+        0.2643
+      ],
+      "max_speed_mps": null,
+      "filter_v_max_mps": null
+    },
+    "training": {
+      "run_name": "obstacle-agent",
+      "n_phase1_steps": 0,
+      "n_phase2_steps": 5000000,
+      "ckpt_interval": 250000,
+      "eval_interval": 100000,
+      "patience_evals": 40,
+      "eval_set": "obs-set-dev-500",
+      "n_empty_envs": 0,
+      "layout_switch": "complete",
+      "sim2real": true,
+      "num_laps": 2
+    },
+    "obstacles": {
+      "n_obstacles": 2,
+      "min_s_distance": 5.0,
+      "obstacle_width": 0.25,
+      "obstacle_length": 0.35,
+      "centre_deadzone": 0.0,
+      "start_exclusion": 5.0,
+      "zones_file": "zones.json"
+    }
+  },
+  "eval": {
+    "run": "obstacle-agent",
+    "checkpoint": "best_eval",
+    "seeds": [
+      17
+    ],
+    "sf": "on",
+    "eval_set": "car-0908",
+    "map": "lab-20260906",
+    "trained_map": "lab-20260906",
+    "layout": "all",
+    "laps": 2,
+    "sim2real": true,
+    "obstacles": "detector",
+    "driver": "policy",
+    "speed_scale": 1.0,
+    "jobs": 4,
+    "log": true,
+    "render": false,
+    "slowdown": 1.0
+  },
+  "seeds": {
+    "17": {
+      "success_rate": 1.0,
+      "pace": 0.8730256968352262,
+      "mean_lap_time": 8.041000425815582,
+      "collisions": 0.0,
+      "n_layouts": 4.0,
+      "steer_rate": 0.11514468536296986,
+      "speed_cmd_rate": 0.08523519806502476,
+      "interventions": 257,
+      "speed_capped": 0,
+      "uncertified": 4,
+      "outcomes": {
+        "Passthrough": 1222,
+        "Qp": 109,
+        "Segment": 82,
+        "Backup": 70,
+        "Uncertified": 4
+      },
+      "selections": {
+        "NoObstacleInHorizon": 813,
+        "CertifiedRl": 409,
+        "Stop": 19,
+        "Corridor": 77,
+        "PassLeft": 111,
+        "PassRight": 54,
+        "Uncertified": 4
+      },
+      "score": 1.0873025696835226,
+      "layouts": [
+        {
+          "index": 0,
+          "n_obstacles": 2,
+          "outcome": "completed",
+          "lap_times": [
+            7.746000289916992,
+            7.675000190734863
+          ],
+          "steps": 358,
+          "sim_time": 23.986000000000054,
+          "terminal_v": 3.1423909664154053,
+          "steer_rate": 0.10837697992413486,
+          "speed_cmd_rate": 0.06799116756574526,
+          "interventions": 33,
+          "speed_capped": 0,
+          "outcomes": {
+            "Passthrough": 323,
+            "Qp": 23,
+            "Segment": 7,
+            "Backup": 5
+          },
+          "selections": {
+            "NoObstacleInHorizon": 184,
+            "CertifiedRl": 139,
+            "Stop": 1,
+            "Corridor": 17,
+            "PassLeft": 13,
+            "PassRight": 4
+          },
+          "ppo_ms": {
+            "mean": 0.2884373995823416,
+            "p50": 0.2737800023169257,
+            "p95": 0.3576386487111449,
+            "p99": 0.5034559124032969,
+            "max": 1.06526400486473
+          },
+          "filter_ms": {
+            "mean": 0.6852633160130542,
+            "p50": 0.5451405013445765,
+            "p95": 1.8167141497542605,
+            "p99": 2.8422535573190544,
+            "max": 3.1518089963356033
+          },
+          "log_path": "filter_log_seed17_k0.csv"
+        },
+        {
+          "index": 1,
+          "n_obstacles": 2,
+          "outcome": "completed",
+          "lap_times": [
+            7.939000606536865,
+            7.804000377655029
+          ],
+          "steps": 367,
+          "sim_time": 24.589000000000055,
+          "terminal_v": 2.8756673336029053,
+          "steer_rate": 0.09219570300600184,
+          "speed_cmd_rate": 0.0813709492021182,
+          "interventions": 90,
+          "speed_capped": 0,
+          "outcomes": {
+            "Passthrough": 274,
+            "Qp": 29,
+            "Segment": 32,
+            "Backup": 30,
+            "Uncertified": 2
+          },
+          "selections": {
+            "NoObstacleInHorizon": 209,
+            "CertifiedRl": 65,
+            "PassRight": 13,
+            "PassLeft": 46,
+            "Corridor": 27,
+            "Stop": 5,
+            "Uncertified": 2
+          },
+          "ppo_ms": {
+            "mean": 0.2836565528641016,
+            "p50": 0.25697299861349165,
+            "p95": 0.41796659352257837,
+            "p99": 0.5705078216851682,
+            "max": 1.2540290044853464
+          },
+          "filter_ms": {
+            "mean": 0.9746885715653277,
+            "p50": 0.5467889859573916,
+            "p95": 2.725631599605549,
+            "p99": 4.092205850174647,
+            "max": 5.508861999260262
+          },
+          "log_path": "filter_log_seed17_k1.csv"
+        },
+        {
+          "index": 2,
+          "n_obstacles": 2,
+          "outcome": "completed",
+          "lap_times": [
+            7.974000453948975,
+            8.200000762939453
+          ],
+          "steps": 368,
+          "sim_time": 24.656000000000056,
+          "terminal_v": 2.9165873527526855,
+          "steer_rate": 0.12824706654266818,
+          "speed_cmd_rate": 0.08450688809439864,
+          "interventions": 87,
+          "speed_capped": 0,
+          "outcomes": {
+            "Passthrough": 280,
+            "Segment": 28,
+            "Qp": 28,
+            "Backup": 31,
+            "Uncertified": 1
+          },
+          "selections": {
+            "NoObstacleInHorizon": 200,
+            "CertifiedRl": 80,
+            "PassRight": 19,
+            "PassLeft": 40,
+            "Corridor": 18,
+            "Stop": 10,
+            "Uncertified": 1
+          },
+          "ppo_ms": {
+            "mean": 0.289008502714632,
+            "p50": 0.2653484989423305,
+            "p95": 0.4229839541949331,
+            "p99": 0.6020635990716977,
+            "max": 0.9677500056568533
+          },
+          "filter_ms": {
+            "mean": 1.0249556521359964,
+            "p50": 0.5445994975161739,
+            "p95": 3.198521000012987,
+            "p99": 4.085644126753321,
+            "max": 4.646860994398594
+          },
+          "log_path": "filter_log_seed17_k2.csv"
+        },
+        {
+          "index": 3,
+          "n_obstacles": 2,
+          "outcome": "completed",
+          "lap_times": [
+            8.457000732421875,
+            8.532999992370605
+          ],
+          "steps": 394,
+          "sim_time": 26.39800000000006,
+          "terminal_v": 3.057953119277954,
+          "steer_rate": 0.13043260109388663,
+          "speed_cmd_rate": 0.10518332070619019,
+          "interventions": 47,
+          "speed_capped": 0,
+          "outcomes": {
+            "Passthrough": 345,
+            "Qp": 29,
+            "Segment": 15,
+            "Uncertified": 1,
+            "Backup": 4
+          },
+          "selections": {
+            "NoObstacleInHorizon": 220,
+            "CertifiedRl": 125,
+            "PassRight": 18,
+            "PassLeft": 12,
+            "Corridor": 15,
+            "Uncertified": 1,
+            "Stop": 3
+          },
+          "ppo_ms": {
+            "mean": 0.2659742842602123,
+            "p50": 0.24526599736418575,
+            "p95": 0.37648459619958874,
+            "p99": 0.4914315334463022,
+            "max": 1.0962719970848411
+          },
+          "filter_ms": {
+            "mean": 0.7503531961645671,
+            "p50": 0.5334329980541952,
+            "p95": 2.0061090021044943,
+            "p99": 3.117514682526231,
+            "max": 4.252578000887297
+          },
+          "log_path": "filter_log_seed17_k3.csv"
+        }
+      ]
+    }
+  },
+  "mean": {
+    "success_rate": 1.0,
+    "pace": 0.8730256968352262,
+    "mean_lap_time": 8.041000425815582,
+    "collisions": 0.0,
+    "n_layouts": 4.0,
+    "steer_rate": 0.11514468536296986,
+    "speed_cmd_rate": 0.08523519806502476,
+    "interventions": 257.0,
+    "speed_capped": 0.0,
+    "uncertified": 4.0,
+    "score": 1.0873025696835226,
+    "min_success_rate": 1.0
+  }
+}

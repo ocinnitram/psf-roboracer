@@ -1,0 +1,48 @@
+[project]
+name = "ppo-sf-roboracer"
+version = "0.1.0"
+description = "PPO racing policy with a predictive safety filter for a 1:10 scale RoboRacer car"
+requires-python = ">=3.10,<3.11"
+dependencies = [
+    "numpy==1.22.0",
+    "scipy==1.9.3",
+    "torch==1.13.1",
+    "pyyaml>=6",
+    "pydantic>=2",
+    "pillow>=9",
+    "matplotlib==3.5.3",
+    "wandb",
+]
+
+[project.optional-dependencies]
+# trackgen/: SLAM map -> track data. Heavier scientific stack, only needed per new map.
+trackgen = [
+    "pandas==1.5.3",
+    "scikit-image==0.19.3",
+    "quadprog>=0.1.11",
+    "casadi>=3.8.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=7", "ninja>=1.11"]
+
+[tool.uv]
+default-groups = ["dev"]
+
+# Editor type checking: the uv venv, plus the built pybind module and sf/
+[tool.pyright]
+typeCheckingMode = "basic"
+venvPath = "."
+venv = ".venv"
+extraPaths = ["sf", "sf/build", "vehicle", "sim/python"]
+exclude = ["**/externals", "**/build", ".venv"]
+
+# CPU-only torch. Training runs on CPU (32 sim envs, single-threaded BLAS, small MLP);
+# the PyPI wheel would pull ~1.7 GB of CUDA libraries that were not used.
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

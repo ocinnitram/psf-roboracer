@@ -1,0 +1,33 @@
+{
+  "track": "lab-20260906",
+  "description": "Placement config for the obs-set-dev-500 and obs-set-tune-50 evaluation sets. Stations come from the measured-sight zones, which already guarantee a passable side, so no numeric screen and no class composition are applied: s then n are sampled uniformly.",
+  "screening": {
+    "s_step_m": 0.05,
+    "n_step_m": 0.025,
+    "conditioning_approach_m": 0.75,
+    "clearance_after_m": 0.5,
+    "max_abs_curvature_per_m": null,
+    "min_track_width_m": null,
+    "max_width_variation_m": null,
+    "extra_reserve_m": null,
+    "boundary_buffer_m": 0.165,
+    "collision_margin_m": 0.05,
+    "passing_margin_m": 0.02,
+    "ego_width_m": 0.29,
+    "ego_length_m": 0.5,
+    "obstacle_width_m": 0.25,
+    "obstacle_length_m": 0.35,
+    "visibility_approach_samples_m": [],
+    "valid_zones_s": [
+      [
+        3.2,
+        7.2
+      ],
+      [
+        15.5,
+        21.0
+      ]
+    ]
+  },
+  "main_mix": null
+}

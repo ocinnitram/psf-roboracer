@@ -1,0 +1,5 @@
+seed	layout	n_obstacles	outcome	laps_s	interventions	uncertified	term_v	steps	speed_capped
+17	0	2	completed	7.5100,7.6170	0	0	3.0161402225494385	347	0
+17	1	2	completed	7.5110,7.4270	0	0	2.7190704345703125	343	0
+17	2	2	completed	7.5920,7.2660	0	0	2.778242349624634	339	0
+17	3	2	crashed		0	0	2.457953691482544	82	0

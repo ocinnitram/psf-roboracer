@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Train the PPO agent.   ./train [empty|obstacles|path|run] [--seeds 17,76] [--layout-switch episode|complete|never] [--warmstart <run>] [--base <run>] [--set key=value ...] [--wandb] [--tag t]
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/.launcher.sh"
+exec uv run --frozen python -u -m ppo.train "$@"

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Build sf/tracks/<map>/ from a raw SLAM map.
+#   ./track <map> --direction cw|ccw [--start s] [--zones N|a:b,c:d] [--vmax MPS] [--no-plot] [--from <stage>]
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/.launcher.sh"
+if [[ " $* " == *" --no-plot "* ]]; then
+    export MPLBACKEND="${MPLBACKEND:-Agg}"
+fi
+exec uv run --frozen --extra trackgen python -u -m trackgen.run "$@"

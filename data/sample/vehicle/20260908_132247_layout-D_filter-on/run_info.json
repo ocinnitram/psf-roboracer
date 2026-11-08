@@ -1,0 +1,9 @@
+{
+  "run_name": "obstacle-agent__actor_seed_17_best_eval_filter",
+  "n_laps": 3,
+  "policy": "obstacle-agent/_actor_seed_17_best_eval",
+  "use_filter": true,
+  "map_name": "lab-20260906",
+  "stamp": "20260908_132248",
+  "outcome": "completed"
+}

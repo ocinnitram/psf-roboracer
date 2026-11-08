@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Run every test: sim C tests, sf ctest, pytest across vehicle/ sf/ sim/ ppo/ evaluation/ trackgen/.
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/.launcher.sh"
+make -C sim test
+ctest --test-dir sf/build --output-on-failure
+uv run --frozen --extra trackgen pytest -q

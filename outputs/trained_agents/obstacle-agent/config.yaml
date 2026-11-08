@@ -1,0 +1,52 @@
+ppo:
+  batch_size: 1024
+  rollout: 8192
+  clip: 0.10061193760680263
+  c2_i: 0.012930671002858373
+  c2_f: 0.0005552204399590337
+  gae_lambda: 0.961831763898234
+  gamma: 0.995
+  alpha: 0.0003551499486407444
+  log_std_i: -0.7
+  n_epochs: 10
+  normalise_advantages: false
+  target_kl: 0.05
+  c1: 0.5
+  hidden_size: 512
+  r_progress: 50.0
+  r_collision: -10.0
+  r_lap: 40.0
+  caps_lambda_t: 0.6
+  caps_lambda_s: 0.3
+  caps_lambda_t_v: 0.2
+  caps_lambda_s_v: 0.4
+  caps_sigma_s: 0.05
+  caps_scale_hold: 0.5
+track:
+  map: lab-20260906
+  opt_time: 7.02
+  length: 24.387
+  direction: cw
+  start_pose:
+  - 0.0236
+  - 0.2606
+  - 0.2643
+training:
+  run_name: obstacle-agent
+  n_phase1_steps: 0
+  n_phase2_steps: 5000000
+  ckpt_interval: 250000
+  eval_interval: 100000
+  patience_evals: 40
+  eval_set: obs-set-dev-500
+  n_empty_envs: 0
+  sim2real: true
+  num_laps: 2
+obstacles:
+  n_obstacles: 2
+  min_s_distance: 5.0
+  obstacle_width: 0.25
+  obstacle_length: 0.35
+  centre_deadzone: 0.0
+  start_exclusion: 5.0
+  zones_file: zones.json
