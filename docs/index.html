@@ -27,6 +27,9 @@
   video { display: block; width: 100%; margin: 32px 0 8px; border-radius: 10px; border: 1px solid var(--line);
           background: #000; aspect-ratio: 16 / 9; }
   .dl { font-size: 0.9rem; color: var(--muted); margin: 0; }
+  .clips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0 8px; }
+  .clips video { margin: 0; }
+  @media (max-width: 700px) { .clips { grid-template-columns: 1fr; } }
   a { color: var(--maroon); }
   h2 { color: var(--maroon); font-size: 1.25rem; margin: 40px 0 10px; }
   table { border-collapse: collapse; width: 100%; background: #fff; border: 1px solid var(--line); }
@@ -59,6 +62,16 @@
     Your browser cannot play this video. <a href="media/thesis_video.mp4">Download it (MP4)</a>.
   </video>
   <p class="dl">4:18 · 1080p</p>
+
+  <div class="clips">
+    <video controls muted loop playsinline preload="metadata" poster="media/sim_k169_poster.jpg">
+      <source src="media/sim_k169.mp4" type="video/mp4">
+    </video>
+    <video controls muted loop playsinline preload="metadata" poster="media/sim_k391_poster.jpg">
+      <source src="media/sim_k391.mp4" type="video/mp4">
+    </video>
+  </div>
+  <p class="dl">Policy with the safety filter on two evaluation layouts in a custom simulator, shown in real time.</p>
 
   <h2>Summary</h2>
   <p>Reinforcement learning can learn high-performance control, but it cannot by itself guarantee that a system's
